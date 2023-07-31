@@ -24,7 +24,7 @@ import axios from "axios";
 import ChatLoading from "../loader/ChatLoading";
 import UserListItem from "../miscellaneous/UserListItem";
 import { getSender } from "../config/ChatLogics";
-import NotificationBadge, {Effect} from "react-notification-badge";
+import NotificationBadge, { Effect } from "react-notification-badge";
 
 const SideDrawer = () => {
   axios.defaults.baseURL = "https://chatsappserver.onrender.com";
@@ -142,6 +142,7 @@ const SideDrawer = () => {
         justifyContent="space-between"
         backgroundColor="white"
         padding="5px 10px 5px 10px"
+        alignItems="center"
       >
         <Tooltip title="Search for an User" arrow placement="bottom-end">
           <Button
@@ -163,7 +164,11 @@ const SideDrawer = () => {
             </Typography>
           </Button>
         </Tooltip>
-        <Typography variant="h3" color="rgba(0,0,0,0.65)">
+        <Typography
+          variant="h3"
+          fontSize={{ xs: "24px", sm: "24px", md: "28px" }}
+          color="rgba(0,0,0,0.65)"
+        >
           ChatsApp
         </Typography>
         <Stack direction="row" alignItems="center">
