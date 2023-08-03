@@ -190,10 +190,15 @@ const UpdateGroupModal = ({ fetchAgain, setFetchAgain, fetchMessages }) => {
           </Alert>
         </Snackbar>
         <Dialog onClose={() => openGroupModal(false)} open={groupModal}>
-          <DialogTitle fontSize="35px" width="400px" textAlign="center">
+          <DialogTitle
+            fontSize="35px"
+            width={{ xs: "250px", sm: "250px", md: "400px" }}
+            textAlign="center"
+            style={{ margin: "0 auto" }}
+          >
             {selectedChat?.chatName}
           </DialogTitle>
-          <DialogContent width="400px">
+          <DialogContent width={{ xs: "250px", sm: "250px", md: "400px" }}>
             <Stack spacing={2} alignItems="center" width="100%">
               <Stack
                 direction="row"

@@ -27,10 +27,15 @@ const ProfileModal = ({ user, children }) => {
       </>
       <Stack width="100%">
         <Dialog onClose={() => setProfileModal(false)} open={profileModal}>
-          <DialogTitle fontSize="40px" width="400px" textAlign="center">
+          <DialogTitle
+            fontSize="40px"
+            width={{ xs: "250px", sm: "90%", md: "400px" }}
+            textAlign="center"
+            style={{ margin: "0 auto" }}
+          >
             {user?.name}
           </DialogTitle>
-          <DialogContent width="400px">
+          <DialogContent width={{ xs: "95%", sm: "90%", md: "400px" }}>
             <Avatar
               style={{
                 display: "flex",

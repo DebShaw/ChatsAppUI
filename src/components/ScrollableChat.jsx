@@ -77,10 +77,15 @@ const ScrollableChat = ({ messages }) => {
         ))}
       <Stack width="100%">
         <Dialog onClose={() => openProfile(false)} open={profile}>
-          <DialogTitle fontSize="40px" width="400px" textAlign="center">
+          <DialogTitle
+            style={{ margin: "0 auto" }}
+            fontSize="40px"
+            width={{ xs: "250px", sm: "90%", md: "400px" }}
+            textAlign="center"
+          >
             {senderUser?.name}
           </DialogTitle>
-          <DialogContent width="400px">
+          <DialogContent width={{ xs: "95%", sm: "90%", md: "400px" }}>
             <Avatar
               style={{
                 display: "flex",

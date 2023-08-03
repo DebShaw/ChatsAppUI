@@ -122,6 +122,7 @@ const CreateGroup = ({ children }) => {
           fontSize="40px"
           width={{ xs: "250px", sm: "250px", md: "400px" }}
           textAlign="center"
+          style={{ margin: "0 auto" }}
         >
           Create Group Chat
         </DialogTitle>

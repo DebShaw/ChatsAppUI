@@ -6,6 +6,7 @@ import {
   TextField,
   Snackbar,
   Alert,
+  Button,
 } from "@mui/material";
 import Lottie from "react-lottie";
 import animationData from "../animations/typing.json";
@@ -18,6 +19,7 @@ import UpdateGroupModal from "./UpdateGroupModal";
 import axios from "axios";
 import ScrollableChat from "./ScrollableChat";
 import io from "socket.io-client";
+import SendIcon from "@mui/icons-material/Send";
 
 const ENDPOINT = "https://chatsappserver.onrender.com";
 //eslint-disable-next-line
@@ -118,6 +120,29 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         setSeverity("error");
         openSnack(true);
       }
+    }
+  };
+
+  const sendButtonSubmit = async () => {
+    socket.emit("stop typing", selectedChat._id);
+    try {
+      setNewMessage("");
+      const { data } = await axios.post(
+        "/api/message",
+        {
+          content: newMessage,
+          chatId: selectedChat._id,
+        },
+        {
+          headers: { Authorization: `Bearer ${user.token}` },
+        }
+      );
+      socket.emit("new message", data);
+      setMessages([...messages, data]);
+    } catch (error) {
+      setAlert("Error while sending message");
+      setSeverity("error");
+      openSnack(true);
     }
   };
 
@@ -251,23 +276,45 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             ) : (
               <></>
             )}
-            <TextField
-              variant="outlined"
-              style={{
-                backgroundColor: "#E0E0E0",
-                borderRadius: "10px",
-                marginTop: "5px",
-              }}
-              sx={{
-                "& .MuiOutlinedInput-root": {
-                  "& > fieldset": { border: "none" },
-                },
-              }}
-              placeholder="Message..."
-              onChange={typingHandler}
-              onKeyDown={sendMessage}
-              value={newMessage}
-            />
+            <Stack
+              direction="row"
+              spacing={1}
+              justifyContent="space-between"
+              width="100%"
+            >
+              <TextField
+                variant="outlined"
+                style={{
+                  width: "100%",
+                  backgroundColor: "#E0E0E0",
+                  borderRadius: "10px",
+                  marginTop: "5px",
+                }}
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    "& > fieldset": { border: "none" },
+                  },
+                }}
+                placeholder="Message..."
+                onChange={typingHandler}
+                onKeyDown={sendMessage}
+                value={newMessage}
+              />
+              <Button
+                variant="text"
+                style={{
+                  width: "fit-content",
+                  color: "black",
+                  textTransform: "none",
+                  marginTop: "5px",
+                }}
+                sx={{ ":hover": { backgroundColor: "transparent" } }}
+                endIcon={<SendIcon />}
+                onClick={sendButtonSubmit}
+              >
+                Send
+              </Button>
+            </Stack>
           </Stack>
         </Stack>
       ) : (
